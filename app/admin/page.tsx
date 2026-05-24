@@ -108,9 +108,9 @@ const clearFuturePicks = async () => {
         <>
         <Navbar />
 
-      <main className="min-h-screen bg-slate-100 p-8">
+      <main className="min-h-screen bg-slate-100 p-4 sm:p-8">
         <div className="mx-auto max-w-md rounded-xl bg-white p-6 shadow">
-          <h1 className="text-2xl font-bold">Admin</h1>
+          <h1 className="text-2xl font-bold text-slate-900">Admin</h1>
           <p className="mt-4 text-red-700">
             You do not have permission to view this page.
           </p>
@@ -126,7 +126,7 @@ const clearFuturePicks = async () => {
   return (
     <>
         <Navbar />
-    <main className="min-h-screen bg-slate-100 p-8">
+    <main className="min-h-screen bg-slate-100 p-4 sm:p-8">
       <div className="mx-auto max-w-md rounded-xl bg-white p-6 shadow">
         <h1 className="text-2xl font-bold">Admin</h1>
 
