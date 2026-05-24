@@ -177,7 +177,7 @@ const { data: teamsData } = await supabase
       <main className="min-h-screen bg-[url('/celebration.jpeg')] bg-cover bg-center bg-fixed p-4 sm:p-8">
       <div className="min-h-screen bg-black/40">
         <div className="mx-auto w-full max-w-5xl rounded-2xl bg-white/95 p-6 shadow-xl backdrop-blur">
-          <h1 className="text-3xl font-bold">Leaderboard</h1>
+          <h1 className="text-3xl font-bold text-slate-900">Leaderboard</h1>
 
           <a
             href="/pick"

@@ -373,7 +373,7 @@ const getPickResult = (pick: any) => {
       <main className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-emerald-50 p-4 sm:p-8">
         <div className="mx-auto max-w-4xl rounded-2xl bg-white/95 p-6 shadow-xl backdrop-blur">
           <div className="rounded-2xl bg-gradient-to-r from-blue-950/95 to-emerald-700/90 p-6 text-white shadow-xl">
-  <h1 className="text-3xl font-bold">World Cup Predictor</h1>
+  <h1 className="text-3xl font-bold text-slate-900">World Cup Predictor</h1>
   <p className="mt-2 text-blue-100">
     Pick winners. Score points. Climb the leaderboard.
   </p>

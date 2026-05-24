@@ -29,7 +29,7 @@ export default function ResetPasswordPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-emerald-50 p-8">
       <div className="mx-auto max-w-md rounded-2xl bg-white/95 p-6 shadow-xl">
-        <h1 className="text-2xl font-bold">Reset Password</h1>
+        <h1 className="text-2xl font-bold text-slate-900">Reset Password</h1>
 
         <input
           className="mt-4 w-full border p-2"

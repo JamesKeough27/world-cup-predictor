@@ -111,9 +111,9 @@ const getFixtureStatus = (fixture: any) => {
     <>
       <Navbar />
       <main className="min-h-screen bg-[url('/stadium.jpeg')] bg-cover bg-center bg-fixed">
-      <div className="min-h-screen bg-black/40 p-8">
+      <div className="min-h-screen bg-black/40 p-4 sm:p-8">
 <div className="mx-auto mt-6 max-w-5xl rounded-2xl bg-white/90 p-6 shadow-2xl backdrop-blur-md ring-1 ring-white/20">
-          <h1 className="text-3xl font-bold">Fixtures</h1>
+          <h1 className="text-3xl font-bold text-slate-900">Fixtures</h1>
 <p className="mt-2 text-sm text-slate-600">
   All kickoff times shown in Pacific Time (PT), with local venue time below.
 </p>

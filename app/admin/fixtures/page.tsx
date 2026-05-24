@@ -314,14 +314,14 @@ const clearAllKnockoutWinners = async () => {
 
 
   if (loading) {
-    return <main className="p-8">Loading...</main>;
+    return <main className="p-4 sm:p-8">Loading...</main>;
   }
 
   if (!isAdmin) {
     return (
       <>
         <Navbar />
-        <main className="min-h-screen bg-slate-100 p-8">
+        <main className="min-h-screen bg-slate-100 p-4 sm:p-8">
           <div className="mx-auto max-w-md rounded-xl bg-white/90 backdrop-blur-sm p-6 shadow">
             <h1 className="text-2xl font-bold">Admin Fixtures</h1>
             <p className="mt-4 text-red-700">
@@ -336,7 +336,7 @@ const clearAllKnockoutWinners = async () => {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-slate-100 p-8">
+      <main className="min-h-screen bg-slate-100 p-4 sm:p-8">
         <div className="mx-auto max-w-6xl rounded-xl bg-white/90 backdrop-blur-sm p-6 shadow">
           <h1 className="text-3xl font-bold">Admin - Fixtures</h1>
 
