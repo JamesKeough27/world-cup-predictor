@@ -37,13 +37,20 @@ const login = async () => {
 };
 
 const signUp = async () => {
-  const { error } = await supabase.auth.signUp({
+  setMessage("");
+
+  const { data, error } = await supabase.auth.signUp({
     email,
     password,
   });
 
   if (error) {
     setMessage(error.message);
+    return;
+  }
+
+  if (data.user && data.user.identities?.length === 0) {
+    setMessage("An account already exists for this email. Please log in instead.");
     return;
   }
 
