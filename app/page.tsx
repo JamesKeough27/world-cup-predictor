@@ -36,10 +36,35 @@ const login = async () => {
   window.location.href = "/pick";
 };
 
+const signUp = async () => {
+  const { error } = await supabase.auth.signUp({
+    email,
+    password,
+  });
+
+  if (error) {
+    setMessage(error.message);
+    return;
+  }
+
+  setMessage("Account created. You can now log in.");
+};
+
+const resetPassword = async () => {
+  const { error } = await supabase.auth.resetPasswordForEmail(email);
+
+  if (error) {
+    setMessage(error.message);
+    return;
+  }
+
+  setMessage("Password reset email sent.");
+};
+
   return (
     <main className="min-h-screen bg-slate-100 p-8">
       <div className="mx-auto max-w-md rounded-xl bg-white p-6 shadow">
-        <h1 className="text-2xl font-bold">Survivor Pool Login</h1>
+        <h1 className="text-2xl font-bold">World Cup Pool Login</h1>
 
         <input
           className="mt-4 w-full border p-2"
@@ -62,6 +87,20 @@ const login = async () => {
         >
           Login
         </button>
+
+        <button
+  onClick={signUp}
+  className="mt-2 w-full rounded bg-slate-700 p-2 text-white"
+>
+  Sign Up
+</button>
+
+<button
+  onClick={resetPassword}
+  className="mt-2 w-full rounded bg-slate-200 p-2 text-slate-800"
+>
+  Forgot password?
+</button>
 
         {message && <p className="mt-4 text-sm">{message}</p>}
       </div>
