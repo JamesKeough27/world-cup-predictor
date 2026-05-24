@@ -412,10 +412,10 @@ const getPickResult = (pick: any) => {
           </div>
 
           {currentWindow ? (
-            <div className="mt-6 rounded bg-gradient-to-br from-slate-100 via-blue-50 to-emerald-50 p-4">
+            <div className="mt-6 rounded-2xl border border-blue-100 bg-white p-5 shadow-md">
 
               <select
-  className="mb-4 w-full border p-2"
+  className="mb-4 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-semibold text-slate-900 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200"
   value={selectedWindowId}
   onChange={(e) => {
     setSelectedWindowId(e.target.value);
@@ -431,9 +431,11 @@ const getPickResult = (pick: any) => {
       </option>
     ))}
 </select>
-              <h2 className="text-xl font-semibold">{selectedWindow?.name}</h2>
+              <h2 className="text-2xl font-extrabold text-slate-900">
+  {selectedWindow?.name}
+</h2>
 
-              <p className="mt-2 text-sm font-semibold text-slate-900">
+              <p className="mt-3 rounded-xl bg-blue-50 p-4 text-sm font-semibold leading-7 text-slate-900">
                 Points available: <strong>{selectedWindow?.points}</strong>
                 <br />
                 Lock time:{" "}
@@ -459,13 +461,13 @@ const getPickResult = (pick: any) => {
               </p>
 
               {!selectedWindow?.reuse_allowed && (
-                <p className="mt-3 text-sm text-slate-600">
+                <p className="mt-3 text-sm font-medium text-slate-800">
                   Reuse rule: you cannot pick a team you have already used.
                 </p>
               )}
 
               {selectedWindow?.reuse_allowed && (
-                <p className="mt-3 text-sm text-slate-600">
+                <p className="mt-3 text-sm font-medium text-slate-800">
                   Reuse rule lifted: teams may be picked again from this round
                   onward.
                 </p>
