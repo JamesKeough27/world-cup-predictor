@@ -99,6 +99,7 @@ const latestPick = [...visiblePicks].sort(
       return {
         userId,
         name: profile?.display_name || userId.slice(0, 6),
+        paidIn: profile?.paid_in || false,
         totalPoints,
         correct: correctPicks.length,
         resolved: resolvedPicks.length,
@@ -144,7 +145,7 @@ const [teams, setTeams] = useState<any[]>([]);
 
       const { data: profilesData } = await supabase
         .from("profiles")
-        .select("id, display_name");
+        .select("id, display_name, paid_in");
 
       const { data: fixturesData } = await supabase
         .from("fixtures")
@@ -213,9 +214,22 @@ const { data: teamsData } = await supabase
     </div>
 
     <div>
-      <div className="text-base font-bold text-slate-900">
-  {player.name}
+      
+<div className="flex items-center gap-2">
+  <span className="text-base font-bold text-slate-900">
+    {player.name}
+  </span>
+
+  {player.paidIn && (
+    <span
+      title="Money pot participant"
+      className="rounded-full bg-yellow-100 px-2 py-1 text-xs font-bold text-yellow-800"
+    >
+      💰 Pot
+    </span>
+  )}
 </div>
+
       <div className="text-xs font-medium text-slate-700">
         {player.correct}/{player.resolved} correct
       </div>

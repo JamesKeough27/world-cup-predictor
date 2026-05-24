@@ -145,6 +145,13 @@ const clearFuturePicks = async () => {
     Manage group standings
   </a>
 
+<a
+  href="/admin/players"
+  className="rounded-lg bg-yellow-600 px-4 py-3 text-sm font-semibold text-white shadow hover:bg-yellow-700"
+>
+  Manage paid-in players
+</a>
+
 <button
   onClick={() => {
     if (
