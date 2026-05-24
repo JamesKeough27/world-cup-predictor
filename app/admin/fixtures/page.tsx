@@ -311,6 +311,26 @@ const clearAllKnockoutWinners = async () => {
   setMessage("All knockout winners and propagated teams cleared.");
 };
 
+const jumpToNextBlankResult = () => {
+  const nextBlank = fixtures.find((fixture) => {
+    const hasScores =
+      fixture.home_score !== null && fixture.away_score !== null;
+
+    const needsWinner = fixture.match_number >= 73;
+    const hasWinner = !!fixture.winner_team_id;
+
+    return !hasScores || (needsWinner && !hasWinner);
+  });
+
+  if (!nextBlank) {
+    setMessage("No blank results found.");
+    return;
+  }
+
+  document
+    .getElementById(`fixture-${nextBlank.id}`)
+    ?.scrollIntoView({ behavior: "smooth", block: "center" });
+};
 
 
   if (loading) {
@@ -318,6 +338,9 @@ const clearAllKnockoutWinners = async () => {
   }
 
   if (!isAdmin) {
+
+
+
     return (
       <>
         <Navbar />
@@ -338,7 +361,9 @@ const clearAllKnockoutWinners = async () => {
       <Navbar />
       <main className="min-h-screen bg-slate-100 p-4 sm:p-8">
         <div className="mx-auto max-w-6xl rounded-xl bg-white p-6 shadow">
-          <h1 className="text-3xl font-bold">Admin - Fixtures</h1>
+          <h1 id="top" className="text-3xl font-extrabold text-slate-900">
+  Admin - Fixtures
+</h1>
 
           <a
             href="/admin"
@@ -354,6 +379,22 @@ const clearAllKnockoutWinners = async () => {
   Clear all knockout winners
 </button>
 
+<div className="mt-3 flex flex-wrap gap-2">
+  <button
+    onClick={jumpToNextBlankResult}
+    className="rounded-lg bg-emerald-700 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-emerald-800"
+  >
+    Jump to next blank result
+  </button>
+
+  <a
+    href="#top"
+    className="rounded-lg bg-blue-800 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-blue-900"
+  >
+    Back to top
+  </a>
+</div>
+
           {message && <p className="mt-4 text-sm font-medium text-slate-900">{message}</p>}
 
           <div className="mt-6 space-y-6">
@@ -364,7 +405,11 @@ const clearAllKnockoutWinners = async () => {
                 fixture.away_team || fixture.away_placeholder || "TBD";
 const isGroupStage = fixture.match_number <= 72;
               return (
-                <div key={fixture.id} className="rounded-2xl border border-slate-300 bg-white p-5 shadow-sm">
+                <div
+  id={`fixture-${fixture.id}`}
+  key={fixture.id}
+  className="rounded-2xl border border-slate-300 bg-white p-5 shadow-sm"
+>
                   <div className="text-lg font-bold text-slate-900">
                     Match {fixture.match_number}: {homeLabel} vs {awayLabel}
                   </div>
