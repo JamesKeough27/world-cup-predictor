@@ -66,7 +66,7 @@ const resetPassword = async () => {
   return (
     <main className="min-h-screen bg-slate-100 p-8">
       <div className="mx-auto max-w-md rounded-xl bg-white p-6 shadow">
-        <h1 className="text-2xl font-bold">World Cup Pool Login</h1>
+        <h1 className="text-2xl font-bold text-slate-900">World Cup Pool Login</h1>
 
         <input
           className="mt-4 w-full border p-2"
