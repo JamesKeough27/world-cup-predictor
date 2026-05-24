@@ -381,7 +381,7 @@ const teamsInSelectedGroup = Array.from(
     return (
       <>
         <Navbar />
-        <main className="min-h-screen bg-slate-100 p-8">
+        <main className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-emerald-50 p-8">
           <div className="mx-auto max-w-md rounded-xl bg-white p-6 shadow">
             <h1 className="text-2xl font-bold text-slate-900">Admin Groups</h1>
             <p className="mt-4 text-red-700">
@@ -396,19 +396,19 @@ const teamsInSelectedGroup = Array.from(
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-slate-100 p-8">
-        <div className="mx-auto max-w-xl rounded-xl bg-white p-6 shadow">
-          <h1 className="text-3xl font-bold">Admin - Group Standings</h1>
+      <main className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-emerald-50 p-8">
+        <div className="mx-auto max-w-xl rounded-2xl bg-white p-6 shadow-2xl ring-1 ring-slate-200">
+          <h1 className="text-3xl font-extrabold text-slate-900">Admin - Group Standings</h1>
 
           <a
             href="/admin"
-            className="mt-3 inline-block rounded bg-slate-200 px-3 py-2 text-sm hover:bg-slate-300"
+            className="mt-3 inline-block rounded-lg bg-blue-800 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-blue-900"
           >
             Back to admin
           </a>
 
           <select
-            className="mt-6 w-full border p-2"
+            className="mt-6 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-semibold text-slate-900 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200"
             value={selectedGroup}
             onChange={(e) => setSelectedGroup(e.target.value)}
           >
@@ -444,12 +444,12 @@ const teamsInSelectedGroup = Array.from(
 
   return (
     <div key={position}>
-      <label className="text-sm font-semibold">
+      <label className="text-sm font-bold text-slate-900">
         Position {position}
       </label>
 
       <select
-        className="mt-1 w-full border p-2"
+        className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-medium text-slate-900 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200"
         value={getTeamForPosition(position)}
         onChange={(e) => savePosition(position, e.target.value)}
       >
@@ -467,8 +467,8 @@ const teamsInSelectedGroup = Array.from(
   );
 })}
 
-<div className="mt-8 border-t pt-6">
-  <h2 className="text-xl font-semibold">Third-place Round of 32 slots</h2>
+<div className="mt-8 border-t border-slate-300 pt-6">
+  <h2 className="text-2xl font-bold text-slate-900">Third-place Round of 32 slots</h2>
 
   <div className="mt-4 space-y-4">
     {thirdPlaceSlots.map((slot) => {
@@ -476,12 +476,12 @@ const teamsInSelectedGroup = Array.from(
 
       return (
         <div key={slot.id}>
-          <label className="text-sm font-semibold">
+          <label className="text-sm font-bold text-slate-900">
             Match {slot.fixture_match_number} {slot.side}: {slot.placeholder}
           </label>
 
           <select
-            className="mt-1 w-full border p-2"
+            className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-medium text-slate-900 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200"
             value={slot.team_id || ""}
             onChange={(e) => saveThirdPlaceSlot(slot, e.target.value)}
           >
@@ -506,7 +506,7 @@ const teamsInSelectedGroup = Array.from(
 </div>
           </div>
 
-          {message && <p className="mt-4 text-sm">{message}</p>}
+          {message && <p className="mt-4 text-sm font-medium text-slate-900">{message}</p>}
         </div>
       </main>
     </>
