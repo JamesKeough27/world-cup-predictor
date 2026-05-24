@@ -126,7 +126,7 @@ const getFixtureStatus = (fixture: any) => {
   </summary>
 
   <img
-    src="/host-map.jpg"
+    src="/host-map.png"
     alt="World Cup host cities map"
     className="mt-4 w-full rounded-xl border border-slate-200 shadow"
   />
