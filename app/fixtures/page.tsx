@@ -113,7 +113,9 @@ const getFixtureStatus = (fixture: any) => {
       <main className="min-h-screen bg-[url('/stadium.jpeg')] bg-cover bg-center bg-fixed">
       <div className="min-h-screen bg-black/25 p-4 sm:p-8">
 <div className="mx-auto mt-6 max-w-5xl rounded-2xl bg-white md:bg-white p-6 shadow-2xl md:backdrop-blur-md ring-1 ring-black/10">
-          <h1 className="text-3xl font-bold text-slate-900">Fixtures</h1>
+          <h1 id="top" className="text-3xl font-bold text-slate-900">
+  Fixtures
+</h1>
 <p className="mt-2 text-sm text-slate-600">
   All kickoff times shown in Pacific Time (PT), with local venue time below.
 </p>
@@ -135,7 +137,7 @@ className="mt-3 inline-block rounded-lg bg-blue-800 px-4 py-2 text-sm font-semib
   {roundFixtures.map((fixture) => (
     <div
       key={fixture.id}
-      className="rounded-2xl bg-white p-5 shadow-xl backdrop-blur-sm ring-1 ring-white/20 transition-all duration-200 hover:-translate-y-1 hover:shadow-2xl"
+      className="rounded-xl bg-white p-3 shadow-md ring-1 ring-slate-200 transition-all duration-200 sm:rounded-2xl sm:p-5 sm:shadow-xl sm:hover:-translate-y-1 sm:hover:shadow-2xl"
     >
       <div className="flex items-center justify-between">
         <div>
@@ -167,7 +169,7 @@ className="mt-3 inline-block rounded-lg bg-blue-800 px-4 py-2 text-sm font-semib
         </span>
       </div>
 
-      <div className="mt-6 flex items-center justify-between gap-4">
+      <div className="mt-3 flex items-center justify-between gap-2 sm:mt-6 sm:gap-4">
         <div className="flex w-1/3 flex-col items-center text-center">
           {teams.find((team) => team.name === fixture.home_team)
             ?.flag_url && (
@@ -177,11 +179,11 @@ className="mt-3 inline-block rounded-lg bg-blue-800 px-4 py-2 text-sm font-semib
                   ?.flag_url
               }
               alt=""
-              className="h-12 w-16 rounded object-cover shadow"
+              className="h-8 w-11 rounded object-cover shadow sm:h-12 sm:w-16"
             />
           )}
 
-          <p className="mt-2 text-lg font-bold text-slate-900">
+          <p className="mt-1 text-sm font-bold text-slate-900 sm:mt-2 sm:text-lg">
             {fixture.home_team ||
               fixture.home_placeholder ||
               "TBD"}
@@ -189,7 +191,7 @@ className="mt-3 inline-block rounded-lg bg-blue-800 px-4 py-2 text-sm font-semib
         </div>
 
         <div className="flex flex-col items-center">
-          <div className="text-4xl font-extrabold text-slate-900">
+          <div className="text-2xl font-extrabold text-slate-900 sm:text-4xl">
             {fixture.home_score !== null &&
             fixture.away_score !== null
               ? `${fixture.home_score} - ${fixture.away_score}`
@@ -234,11 +236,11 @@ className="mt-3 inline-block rounded-lg bg-blue-800 px-4 py-2 text-sm font-semib
                   ?.flag_url
               }
               alt=""
-              className="h-12 w-16 rounded object-cover shadow"
+              className="h-8 w-11 rounded object-cover shadow sm:h-12 sm:w-16"
             />
           )}
 
-          <p className="mt-2 text-lg font-bold text-slate-900">
+          <p className="mt-1 text-sm font-bold text-slate-900 sm:mt-2 sm:text-lg">
             {fixture.away_team ||
               fixture.away_placeholder ||
               "TBD"}
@@ -261,6 +263,13 @@ className="mt-3 inline-block rounded-lg bg-blue-800 px-4 py-2 text-sm font-semib
           )}
         </div>
         </div>
+
+        <a
+  href="#top"
+  className="fixed bottom-4 right-4 rounded-full bg-blue-800 px-4 py-3 text-sm font-bold text-white shadow-lg hover:bg-blue-900"
+>
+  ↑ Top
+</a>
       </main>
     </>
   );
