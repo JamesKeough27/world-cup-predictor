@@ -346,7 +346,7 @@ const jumpToNextBlankResult = () => {
         <Navbar />
         <main className="min-h-screen bg-slate-100 p-4 sm:p-8">
           <div className="mx-auto max-w-md rounded-xl bg-white p-6 shadow">
-            <h1 className="text-2xl font-bold text-slate-900">Admin Fixtures</h1>
+            <h1 id="top"className="text-3xl font-bold text-slate-900">Admin Fixtures</h1>
             <p className="mt-4 text-red-700">
               You do not have permission to view this page.
             </p>
@@ -387,12 +387,6 @@ const jumpToNextBlankResult = () => {
     Jump to next blank result
   </button>
 
-  <a
-    href="#top"
-    className="rounded-lg bg-blue-800 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-blue-900"
-  >
-    Back to top
-  </a>
 </div>
 
           {message && <p className="mt-4 text-sm font-medium text-slate-900">{message}</p>}
@@ -497,6 +491,13 @@ const isGroupStage = fixture.match_number <= 72;
             })}
           </div>
         </div>
+
+        <a
+  href="#top"
+  className="fixed bottom-4 right-4 rounded-full bg-blue-800 px-4 py-3 text-sm font-bold text-white shadow-lg hover:bg-blue-900"
+>
+  ↑ Top
+</a>
       </main>
     </>
   );
