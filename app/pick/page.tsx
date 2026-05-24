@@ -267,11 +267,7 @@ const selectedWindow =
 const fixturesForSelectedWindow = fixtures.filter((fixture) => {
   if (!selectedWindow) return false;
 
-  if (selectedWindow.window_type === "group_day") {
-    return fixture.pick_window_id === selectedWindow.id;
-  }
-
-  return fixture.round_name === selectedWindow.round_name;
+  return fixture.pick_window_id === selectedWindow.id;
 });
 
 const teamOptionsForSelectedWindow = fixturesForSelectedWindow.flatMap(
