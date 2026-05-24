@@ -119,6 +119,19 @@ const getFixtureStatus = (fixture: any) => {
 <p className="mt-2 text-sm text-slate-600">
   All kickoff times shown in Pacific Time (PT), with local venue time below.
 </p>
+
+<details className="mt-6 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+  <summary className="cursor-pointer text-lg font-bold text-slate-900">
+    View host cities map
+  </summary>
+
+  <img
+    src="/host-map.jpg"
+    alt="World Cup host cities map"
+    className="mt-4 w-full rounded-xl border border-slate-200 shadow"
+  />
+</details>
+
           <a
             href="/pick"
 className="mt-3 inline-block rounded-lg bg-blue-800 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-blue-900"
