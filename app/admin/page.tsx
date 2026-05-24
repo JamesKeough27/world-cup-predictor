@@ -133,14 +133,14 @@ const clearFuturePicks = async () => {
 <div className="mt-4 flex flex-col gap-3">
   <a
     href="/admin/fixtures"
-    className="rounded bg-slate-200 px-3 py-2 text-sm hover:bg-slate-300"
+    className="rounded-lg bg-blue-800 px-4 py-3 text-sm font-semibold text-white shadow hover:bg-blue-900"
   >
     Manage fixtures
   </a>
 
   <a
     href="/admin/groups"
-    className="rounded bg-slate-200 px-3 py-2 text-sm hover:bg-slate-300"
+    className="rounded-lg bg-emerald-700 px-4 py-3 text-sm font-semibold text-white shadow hover:bg-emerald-800"
   >
     Manage group standings
   </a>
@@ -162,7 +162,7 @@ const clearFuturePicks = async () => {
 
 </div>
 
-        <a href="/pick" className="mt-2 inline-block text-sm underline">
+        <a href="/pick" className="mt-4 inline-block rounded-lg bg-slate-800 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-slate-900">
           Back to picks
         </a>
 

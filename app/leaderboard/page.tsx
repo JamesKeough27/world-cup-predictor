@@ -176,27 +176,27 @@ const { data: teamsData } = await supabase
       <Navbar />
       <main className="min-h-screen bg-[url('/celebration.jpeg')] bg-cover bg-center bg-fixed p-4 sm:p-8">
       <div className="min-h-screen bg-black/40">
-        <div className="mx-auto w-full max-w-5xl rounded-2xl bg-white/95 p-6 shadow-xl backdrop-blur">
+        <div className="mx-auto w-full max-w-5xl rounded-2xl bg-white p-6 shadow-xl backdrop-blur">
           <h1 className="text-3xl font-bold text-slate-900">Leaderboard</h1>
 
           <a
             href="/pick"
-            className="mt-3 inline-block rounded bg-slate-200 px-3 py-2 text-sm hover:bg-slate-300"
+            className="mt-3 inline-block rounded-lg bg-blue-800 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-blue-900"
           >
             Back to picks
           </a>
 
           <div className="mt-6 overflow-x-auto">
-  <table className="min-w-[700px] w-full text-sm border">
+  <table className="min-w-[700px] w-full overflow-hidden rounded-2xl border border-slate-300 bg-white text-sm shadow-sm">
             <thead>
-              <tr className="bg-gradient-to-br from-slate-100 via-blue-50 to-emerald-50">
-                <th className="p-2 text-left">Rank</th>
-                <th className="p-2 text-left">Player</th>
-                <th className="p-2 text-left">Points</th>
-                <th className="p-2 text-left">Correct</th>
-                <th className="p-2 text-left">Matches Played</th>
-                <th className="p-2 text-left">Win %</th>
-                <th className="p-2 text-left">Latest Pick</th>
+              <tr className="bg-blue-900 text-white">
+                <th className="p-3 text-left text-sm font-bold">Rank</th>
+                <th className="p-3 text-left text-sm font-bold">Player</th>
+                <th className="p-3 text-left text-sm font-bold">Points</th>
+                <th className="p-3 text-left text-sm font-bold">Correct</th>
+                <th className="p-3 text-left text-sm font-bold">Matches Played</th>
+                <th className="p-3 text-left text-sm font-bold">Win %</th>
+                <th className="p-3 text-left text-sm font-bold">Latest Pick</th>
               </tr>
             </thead>
 
@@ -213,8 +213,10 @@ const { data: teamsData } = await supabase
     </div>
 
     <div>
-      <div className="font-semibold">{player.name}</div>
-      <div className="text-xs text-slate-500">
+      <div className="text-base font-bold text-slate-900">
+  {player.name}
+</div>
+      <div className="text-xs font-medium text-slate-700">
         {player.correct}/{player.resolved} correct
       </div>
     </div>
@@ -225,11 +227,11 @@ const { data: teamsData } = await supabase
     {player.totalPoints} pts
   </span>
 </td>
-                  <td className="p-2">{player.correct}</td>
-                  <td className="p-2">{player.resolved}</td>
-                  <td className="p-2">{player.winPercentage}%</td>
+                  <td className="p-3 font-medium text-slate-900">{player.correct}</td>
+                  <td className="p-3 font-medium text-slate-900">{player.resolved}</td>
+                  <td className="p-3 font-medium text-slate-900">{player.winPercentage}%</td>
                   
-<td className="p-2">
+<td className="p-3 font-medium text-slate-900">
   {player.latestPick === "-" ? (
     <span>-</span>
   ) : (

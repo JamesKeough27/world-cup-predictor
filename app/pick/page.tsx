@@ -480,7 +480,7 @@ const getPickResult = (pick: any) => {
           )}
 
           {currentPickName && (
-            <p className="mt-4 rounded bg-gradient-to-br from-slate-100 via-blue-50 to-emerald-50 p-3 text-sm">
+            <p className="mt-4 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-base font-semibold text-slate-900 shadow-sm">
               Current pick: <strong>{currentPickName}</strong>
             </p>
           )}
@@ -512,22 +512,27 @@ const getPickResult = (pick: any) => {
 
           {pickHistory.length > 0 && (
             <div className="mt-8">
-              <h2 className="text-xl font-semibold">Your Picks</h2>
+              <h2 className="text-2xl font-extrabold text-slate-900">
+  Your Picks
+</h2>
 
-              <table className="mt-3 w-full text-sm border">
+              <table className="mt-4 w-full overflow-hidden rounded-2xl border border-slate-300 bg-white text-sm shadow-sm">
                 <thead>
-                  <tr className="bg-gradient-to-br from-slate-100 via-blue-50 to-emerald-50">
-                    <th className="p-2 text-left">Window</th>
-                    <th className="p-2 text-left">Pick</th>
-                    <th className="p-2 text-left">Points</th>
+                  <tr className="bg-blue-900 text-white">
+                    <th className="p-3 text-left text-sm font-bold">Window</th>
+                    <th className="p-3 text-left text-sm font-bold">Pick</th>
+                    <th className="p-3 text-left text-sm font-bold">Points</th>
                   </tr>
                 </thead>
 
                 <tbody>
                   {pickHistory.map((pick, index) => (
-                    <tr key={index} className="border-t">
-                      <td className="p-2">{pick.pick_windows?.name}</td>
-                      <td className="p-2"><div className="flex items-center gap-2">
+                    <tr
+  key={index}
+  className="border-t border-slate-200 bg-white hover:bg-slate-50"
+>
+                      <td className="p-3 font-medium text-slate-900">{pick.pick_windows?.name}</td>
+                      <td className="p-3 font-medium text-slate-900"><div className="flex items-center gap-2">
   <img
     src={
       teams.find((team) => team.id === pick.team_id)?.flag_url || ""
@@ -545,7 +550,7 @@ const getPickResult = (pick: any) => {
       ? "text-green-700"
       : getPickResult(pick).status === "wrong"
       ? "text-red-700"
-      : "text-slate-500"
+      : "text-slate-700"
   }`}
 >
   {getPickResult(pick).points}
