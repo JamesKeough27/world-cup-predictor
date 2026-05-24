@@ -322,7 +322,7 @@ const clearAllKnockoutWinners = async () => {
       <>
         <Navbar />
         <main className="min-h-screen bg-slate-100 p-4 sm:p-8">
-          <div className="mx-auto max-w-md rounded-xl bg-white/90 backdrop-blur-sm p-6 shadow">
+          <div className="mx-auto max-w-md rounded-xl bg-white p-6 shadow">
             <h1 className="text-2xl font-bold">Admin Fixtures</h1>
             <p className="mt-4 text-red-700">
               You do not have permission to view this page.
@@ -337,12 +337,12 @@ const clearAllKnockoutWinners = async () => {
     <>
       <Navbar />
       <main className="min-h-screen bg-slate-100 p-4 sm:p-8">
-        <div className="mx-auto max-w-6xl rounded-xl bg-white/90 backdrop-blur-sm p-6 shadow">
+        <div className="mx-auto max-w-6xl rounded-xl bg-white p-6 shadow">
           <h1 className="text-3xl font-bold">Admin - Fixtures</h1>
 
           <a
             href="/admin"
-            className="mt-3 inline-block rounded bg-slate-200 px-3 py-2 text-sm hover:bg-slate-300"
+            className="mt-3 inline-block rounded-lg bg-blue-800 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-blue-900"
           >
             Back to admin
           </a>
@@ -354,7 +354,7 @@ const clearAllKnockoutWinners = async () => {
   Clear all knockout winners
 </button>
 
-          {message && <p className="mt-4 text-sm">{message}</p>}
+          {message && <p className="mt-4 text-sm font-medium text-slate-900">{message}</p>}
 
           <div className="mt-6 space-y-6">
             {fixtures.map((fixture) => {
@@ -364,17 +364,17 @@ const clearAllKnockoutWinners = async () => {
                 fixture.away_team || fixture.away_placeholder || "TBD";
 const isGroupStage = fixture.match_number <= 72;
               return (
-                <div key={fixture.id} className="rounded border p-4">
-                  <div className="font-semibold">
+                <div key={fixture.id} className="rounded-2xl border border-slate-300 bg-white p-5 shadow-sm">
+                  <div className="text-lg font-bold text-slate-900">
                     Match {fixture.match_number}: {homeLabel} vs {awayLabel}
                   </div>
 
-                  <div className="mt-1 text-sm text-slate-600">
+                  <div className="mt-1 text-sm font-medium text-slate-800">
                     {fixture.round_name}{" "}
                     {fixture.group_name ? `• ${fixture.group_name}` : ""}
                   </div>
 
-<div className="mt-4 rounded bg-slate-100 p-3 text-sm">
+<div className="mt-4 rounded-xl border border-slate-200 bg-blue-50 p-4 text-sm font-medium text-slate-900">
   <div>
     <strong>Home:</strong>{" "}
     {fixture.home_team || fixture.home_placeholder || "TBD"}
@@ -386,7 +386,7 @@ const isGroupStage = fixture.match_number <= 72;
 </div>
 <div className={`mt-4 grid gap-3 ${isGroupStage ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
   <input
-    className="border p-2"
+    className="rounded-lg border border-slate-300 bg-white px-3 py-2 font-medium text-slate-900 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200"
     placeholder="Home score"
     type="number"
     value={fixture.home_score ?? ""}
@@ -398,7 +398,7 @@ const isGroupStage = fixture.match_number <= 72;
   />
 
   <input
-    className="border p-2"
+    className="rounded-lg border border-slate-300 bg-white px-3 py-2 font-medium text-slate-900 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200"
     placeholder="Away score"
     type="number"
     value={fixture.away_score ?? ""}
@@ -412,7 +412,7 @@ const isGroupStage = fixture.match_number <= 72;
   {!isGroupStage && (
   <div>
     <select
-      className="w-full border p-2"
+      className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 font-medium text-slate-900 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200"
       value={fixture.winner_team_id ?? "__none__"}
       onChange={(e) =>
         updateFixture(fixture.id, {
@@ -438,7 +438,7 @@ const isGroupStage = fixture.match_number <= 72;
 
     <button
       onClick={() => clearWinner(fixture)}
-      className="mt-2 rounded bg-slate-200 px-3 py-2 text-sm hover:bg-slate-300"
+      className="mt-2 rounded-lg bg-slate-800 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-slate-900"
     >
       Clear winner
     </button>
