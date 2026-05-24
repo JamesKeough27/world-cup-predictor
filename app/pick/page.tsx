@@ -382,14 +382,14 @@ const getPickResult = (pick: any) => {
           <div className="mt-3 flex gap-3">
             <a
               href="/rules"
-              className="rounded bg-slate-200 px-3 py-2 text-sm hover:bg-slate-300"
+              className="rounded-lg bg-blue-800 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-blue-900"
             >
               View rules
             </a>
 
             <a
               href="/leaderboard"
-              className="rounded bg-slate-200 px-3 py-2 text-sm hover:bg-slate-300"
+              className="rounded-lg bg-emerald-700 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-emerald-800"
             >
               View leaderboard
             </a>
@@ -397,7 +397,7 @@ const getPickResult = (pick: any) => {
 
           <div className="mt-6">
             <input
-              className="w-full border p-2"
+              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 placeholder:text-slate-500 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200"
               placeholder="Your display name"
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
@@ -433,7 +433,7 @@ const getPickResult = (pick: any) => {
 </select>
               <h2 className="text-xl font-semibold">{selectedWindow?.name}</h2>
 
-              <p className="mt-2 text-sm text-slate-700">
+              <p className="mt-2 text-sm font-semibold text-slate-900">
                 Points available: <strong>{selectedWindow?.points}</strong>
                 <br />
                 Lock time:{" "}
@@ -485,7 +485,7 @@ const getPickResult = (pick: any) => {
 
           <select
             disabled={isLocked || !currentWindow}
-            className="mt-6 w-full border p-2 disabled:bg-slate-200"
+            className="mt-6 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-medium text-slate-900 shadow-sm transition focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:text-slate-500"
             value={selectedTeam}
             onChange={(e) => setSelectedTeam(e.target.value)}
           >

@@ -111,15 +111,15 @@ const getFixtureStatus = (fixture: any) => {
     <>
       <Navbar />
       <main className="min-h-screen bg-[url('/stadium.jpeg')] bg-cover bg-center bg-fixed">
-      <div className="min-h-screen bg-black/40 p-4 sm:p-8">
-<div className="mx-auto mt-6 max-w-5xl rounded-2xl bg-white/90 p-6 shadow-2xl backdrop-blur-md ring-1 ring-white/20">
+      <div className="min-h-screen bg-black/25 p-4 sm:p-8">
+<div className="mx-auto mt-6 max-w-5xl rounded-2xl bg-white md:bg-white p-6 shadow-2xl md:backdrop-blur-md ring-1 ring-black/10">
           <h1 className="text-3xl font-bold text-slate-900">Fixtures</h1>
 <p className="mt-2 text-sm text-slate-600">
   All kickoff times shown in Pacific Time (PT), with local venue time below.
 </p>
           <a
             href="/pick"
-            className="mt-3 inline-block rounded bg-slate-200 px-3 py-2 text-sm hover:bg-slate-300"
+className="mt-3 inline-block rounded-lg bg-blue-800 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-blue-900"
           >
             Back to picks
           </a>
@@ -127,7 +127,7 @@ const getFixtureStatus = (fixture: any) => {
           <div className="mt-8 space-y-8">
             {Object.entries(groupedFixtures).map(([roundName, roundFixtures]) => (
               <section key={roundName}>
-                <h2 className="text-xl font-semibold">{roundName}</h2>
+                <h2 className="text-2xl font-bold text-slate-900">{roundName}</h2>
 
                 <div className="mt-3 overflow-x-auto">
                   
@@ -135,15 +135,15 @@ const getFixtureStatus = (fixture: any) => {
   {roundFixtures.map((fixture) => (
     <div
       key={fixture.id}
-      className="rounded-2xl bg-white/90 p-5 shadow-xl backdrop-blur-sm ring-1 ring-white/20 transition-all duration-200 hover:-translate-y-1 hover:shadow-2xl"
+      className="rounded-2xl bg-white p-5 shadow-xl backdrop-blur-sm ring-1 ring-white/20 transition-all duration-200 hover:-translate-y-1 hover:shadow-2xl"
     >
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm text-slate-500">
+          <p className="text-sm font-medium text-slate-700">
             Match {fixture.match_number}
           </p>
 
-          <p className="text-sm text-slate-500">
+          <p className="text-sm font-medium text-slate-700">
             {fixture.group_name || fixture.round_name}
           </p>
         </div>
@@ -181,7 +181,7 @@ const getFixtureStatus = (fixture: any) => {
             />
           )}
 
-          <p className="mt-2 font-semibold">
+          <p className="mt-2 text-lg font-bold text-slate-900">
             {fixture.home_team ||
               fixture.home_placeholder ||
               "TBD"}
@@ -189,7 +189,7 @@ const getFixtureStatus = (fixture: any) => {
         </div>
 
         <div className="flex flex-col items-center">
-          <div className="text-3xl font-bold">
+          <div className="text-4xl font-extrabold text-slate-900">
             {fixture.home_score !== null &&
             fixture.away_score !== null
               ? `${fixture.home_score} - ${fixture.away_score}`
@@ -209,7 +209,7 @@ const getFixtureStatus = (fixture: any) => {
     PT
   </div>
 
-  <div className="mt-1 text-xs text-slate-500">
+  <div className="mt-1 text-xs text-slate-700">
     Local venue time:{" "}
     {new Date(fixture.kickoff_at).toLocaleString("en-US", {
   timeZone: getVenueTimeZone(fixture.city),
@@ -218,7 +218,7 @@ const getFixtureStatus = (fixture: any) => {
 })}
   </div>
 
-  <div className="mt-1 text-xs text-slate-500">
+  <div className="mt-1 text-xs text-slate-700">
     {fixture.venue || "-"}
     {fixture.city ? `, ${fixture.city}` : ""}
   </div>
@@ -238,7 +238,7 @@ const getFixtureStatus = (fixture: any) => {
             />
           )}
 
-          <p className="mt-2 font-semibold">
+          <p className="mt-2 text-lg font-bold text-slate-900">
             {fixture.away_team ||
               fixture.away_placeholder ||
               "TBD"}

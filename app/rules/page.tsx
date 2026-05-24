@@ -6,7 +6,7 @@ export default function RulesPage() {
     <Navbar />
     <main className="min-h-screen bg-slate-100 p-4 sm:p-8">
       <div className="mx-auto max-w-3xl rounded-xl bg-white p-6 shadow">
-        <h1 className="text-3xl font-bold">World Cup 2026 Pool Rules</h1>
+        <h1 className="text-3xl font-bold text-slate-900">World Cup 2026 Pool Rules</h1>
 
         <div className="mt-6 space-y-4 text-slate-700">
           <p>Pick one team each calendar day during the group stage, and per round during the knockout stage.</p>
