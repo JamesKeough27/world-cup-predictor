@@ -110,7 +110,7 @@ const getFixtureStatus = (fixture: any) => {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-[url('/stadium.jpeg')] bg-cover bg-center bg-fixed">
+      <main className="min-h-screen bg-[url('/World-Cup-Trophy.png')] bg-cover bg-center bg-fixed">
       <div className="min-h-screen bg-black/25 p-4 sm:p-8">
 <div className="mx-auto mt-6 max-w-5xl rounded-2xl bg-white md:bg-white p-6 shadow-2xl md:backdrop-blur-md ring-1 ring-black/10">
           <h1 id="top" className="text-3xl font-bold text-slate-900">
