@@ -71,7 +71,7 @@ const resetPassword = async () => {
 };
 
   return (
-  <main className="min-h-screen bg-[url('/celebration.jpeg')] bg-cover bg-center bg-fixed p-4 sm:p-8">
+  <main className="min-h-screen bg-[url('/World Cup Trophy.png')] bg-cover bg-center bg-fixed p-4 sm:p-8">
     <div className="flex min-h-screen items-center justify-center bg-black/35">
       <div className="w-full max-w-md rounded-3xl bg-white p-6 shadow-2xl ring-1 ring-white/30">
         <div className="text-center">
@@ -82,7 +82,7 @@ const resetPassword = async () => {
           </h1>
 
           <p className="mt-3 text-base font-semibold text-slate-700">
-            Pick winners. Score points. Beat your friends.
+            Pick winners. Score points. Climb the leaderboard.
           </p>
 
           <div className="mt-4 text-2xl tracking-wide">
