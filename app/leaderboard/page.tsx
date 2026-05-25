@@ -60,6 +60,11 @@ function buildLeaderboardRows({
 }) {
   const users = Array.from(new Set(picks.map((pick) => pick.user_id)));
 
+  const currentTotalGoals = fixtures.reduce((sum, fixture) => {
+    if (fixture.home_score === null || fixture.away_score === null) return sum;
+    return sum + fixture.home_score + fixture.away_score;
+  }, 0);
+
   return users
     .map((userId) => {
       const userPicks = picks.filter((pick) => pick.user_id === userId);
@@ -84,15 +89,15 @@ function buildLeaderboardRows({
           : 0;
 
       const visiblePicks = userPicks.filter((pick) => {
-  const lockAt = pick.pick_windows?.lock_at;
-  return lockAt && new Date(lockAt) <= new Date();
-});
+        const lockAt = pick.pick_windows?.lock_at;
+        return lockAt && new Date(lockAt) <= new Date();
+      });
 
-const latestPick = [...visiblePicks].sort(
-  (a, b) =>
-    (b.pick_windows?.sort_order || 0) -
-    (a.pick_windows?.sort_order || 0)
-)[0];
+      const latestPick = [...visiblePicks].sort(
+        (a, b) =>
+          (b.pick_windows?.sort_order || 0) -
+          (a.pick_windows?.sort_order || 0)
+      )[0];
 
       const profile = profiles.find((profile) => profile.id === userId);
 
@@ -100,6 +105,7 @@ const latestPick = [...visiblePicks].sort(
         userId,
         name: profile?.display_name || userId.slice(0, 6),
         paidIn: profile?.paid_in || false,
+        predictedTotalGoals: profile?.predicted_total_goals ?? null,
         totalPoints,
         correct: correctPicks.length,
         resolved: resolvedPicks.length,
@@ -114,6 +120,20 @@ const latestPick = [...visiblePicks].sort(
 
       if (b.winPercentage !== a.winPercentage) {
         return b.winPercentage - a.winPercentage;
+      }
+
+      const aGoalDiff =
+        a.predictedTotalGoals === null
+          ? Number.POSITIVE_INFINITY
+          : Math.abs(a.predictedTotalGoals - currentTotalGoals);
+
+      const bGoalDiff =
+        b.predictedTotalGoals === null
+          ? Number.POSITIVE_INFINITY
+          : Math.abs(b.predictedTotalGoals - currentTotalGoals);
+
+      if (aGoalDiff !== bGoalDiff) {
+        return aGoalDiff - bGoalDiff;
       }
 
       return a.name.localeCompare(b.name);
@@ -145,7 +165,7 @@ const [teams, setTeams] = useState<any[]>([]);
 
       const { data: profilesData } = await supabase
         .from("profiles")
-        .select("id, display_name, paid_in");
+        .select("id, display_name, paid_in, predicted_total_goals");
 
       const { data: fixturesData } = await supabase
         .from("fixtures")
@@ -172,6 +192,22 @@ const { data: teamsData } = await supabase
     fixtures,
   });
 
+const resolvedFixtures = fixtures.filter(
+  (fixture) =>
+    fixture.home_score !== null &&
+    fixture.away_score !== null
+);
+
+const currentGoals = resolvedFixtures.reduce(
+  (sum, fixture) => sum + fixture.home_score + fixture.away_score,
+  0
+);
+
+const currentGpg =
+  resolvedFixtures.length > 0
+    ? (currentGoals / resolvedFixtures.length).toFixed(2)
+    : "-";
+
   return (
     <>
       <Navbar />
@@ -179,6 +215,15 @@ const { data: teamsData } = await supabase
       <div className="min-h-screen bg-black/40">
         <div className="mx-auto w-full max-w-5xl rounded-2xl bg-white p-6 shadow-xl backdrop-blur">
           <h1 className="text-3xl font-bold text-slate-900">Leaderboard</h1>
+
+<div className="mt-4 rounded-2xl bg-blue-50 p-4 shadow-sm">
+  <p className="text-sm font-semibold text-slate-900">
+    Current tournament goals: <strong>{currentGoals}</strong>
+  </p>
+  <p className="mt-1 text-sm font-semibold text-slate-900">
+    Current goals per game: <strong>{currentGpg}</strong>
+  </p>
+</div>
 
           <a
             href="/pick"
@@ -194,6 +239,7 @@ const { data: teamsData } = await supabase
                 <th className="p-3 text-left text-sm font-bold">Rank</th>
                 <th className="p-3 text-left text-sm font-bold">Player</th>
                 <th className="p-3 text-left text-sm font-bold">Points</th>
+                <th className="p-3 text-left text-sm font-bold">Tie-breaker</th>
                 <th className="p-3 text-left text-sm font-bold">Correct</th>
                 <th className="p-3 text-left text-sm font-bold">Matches Played</th>
                 <th className="p-3 text-left text-sm font-bold">Win %</th>
@@ -204,65 +250,77 @@ const { data: teamsData } = await supabase
             <tbody>
               {rows.map((player, index) => (
                 <tr key={player.userId} className="border-t hover:bg-slate-50">
-                  <td className="p-3 font-bold">
-  {index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : index + 1}
-</td>
-                  <td className="p-3">
-  <div className="flex items-center gap-3">
-    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-700 text-sm font-bold text-white">
-      {getInitials(player.name)}
-    </div>
+  <td className="p-3 font-bold">
+    {index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : index + 1}
+  </td>
 
-    <div>
-      
-<div className="flex items-center gap-2">
-  <span className="text-base font-bold text-slate-900">
-    {player.name}
-  </span>
+  <td className="p-3">
+    <div className="flex items-center gap-3">
+      <div className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-700 text-sm font-bold text-white">
+        {getInitials(player.name)}
+      </div>
 
-  {player.paidIn && (
-    <span
-      title="Money pot participant"
-      className="rounded-full bg-yellow-100 px-2 py-1 text-xs font-bold text-yellow-800"
-    >
-      💰 Pot
-    </span>
-  )}
-</div>
+      <div>
+        <div className="flex items-center gap-2">
+          <span className="text-base font-bold text-slate-900">
+            {player.name}
+          </span>
 
-      <div className="text-xs font-medium text-slate-700">
-        {player.correct}/{player.resolved} correct
+          {player.paidIn && (
+            <span
+              title="Money pot participant"
+              className="rounded-full bg-yellow-100 px-2 py-1 text-xs font-bold text-yellow-800"
+            >
+              💰 Pot
+            </span>
+          )}
+        </div>
+
+        <div className="text-xs font-medium text-slate-700">
+          {player.correct}/{player.resolved} correct
+        </div>
       </div>
     </div>
-  </div>
-</td>
-                  <td className="p-3">
-  <span className="rounded-full bg-yellow-100 px-3 py-1 font-bold text-yellow-800">
-    {player.totalPoints} pts
-  </span>
-</td>
-                  <td className="p-3 font-medium text-slate-900">{player.correct}</td>
-                  <td className="p-3 font-medium text-slate-900">{player.resolved}</td>
-                  <td className="p-3 font-medium text-slate-900">{player.winPercentage}%</td>
-                  
-<td className="p-3 font-medium text-slate-900">
-  {player.latestPick === "-" ? (
-    <span>-</span>
-  ) : (
-    <div className="flex items-center gap-2">
-      {teams.find((team) => team.name === player.latestPick)?.flag_url && (
-        <img
-          src={teams.find((team) => team.name === player.latestPick)?.flag_url}
-          alt=""
-          className="h-4 w-6 object-cover"
-        />
-      )}
+  </td>
 
-      <span>{player.latestPick}</span>
-    </div>
-  )}
-</td>
-                </tr>
+  <td className="p-3">
+    <span className="rounded-full bg-yellow-100 px-3 py-1 font-bold text-yellow-800">
+      {player.totalPoints} pts
+    </span>
+  </td>
+
+  <td className="p-3 font-medium text-slate-900">
+    {player.predictedTotalGoals
+      ? `${player.predictedTotalGoals} goals`
+      : "-"}
+  </td>
+
+  <td className="p-3 font-medium text-slate-900">{player.correct}</td>
+
+  <td className="p-3 font-medium text-slate-900">{player.resolved}</td>
+
+  <td className="p-3 font-medium text-slate-900">
+    {player.winPercentage}%
+  </td>
+
+  <td className="p-3 font-medium text-slate-900">
+    {player.latestPick === "-" ? (
+      <span>-</span>
+    ) : (
+      <div className="flex items-center gap-2">
+        {teams.find((team) => team.name === player.latestPick)?.flag_url && (
+          <img
+            src={teams.find((team) => team.name === player.latestPick)?.flag_url}
+            alt=""
+            className="h-4 w-6 object-cover"
+          />
+        )}
+
+        <span>{player.latestPick}</span>
+      </div>
+    )}
+  </td>
+</tr>
               ))}
             </tbody>
           </table>

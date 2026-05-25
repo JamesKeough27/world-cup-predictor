@@ -39,6 +39,7 @@ export default function PickPage() {
   const [countdown, setCountdown] = useState("");
   const [selectedWindowId, setSelectedWindowId] = useState("");
 const [fixtures, setFixtures] = useState<any[]>([]);
+const [predictedTotalGoals, setPredictedTotalGoals] = useState("");
 
   useEffect(() => {
     async function loadData() {
@@ -53,11 +54,14 @@ const [fixtures, setFixtures] = useState<any[]>([]);
 
       const { data: profile } = await supabase
         .from("profiles")
-        .select("display_name")
+        .select("display_name, predicted_total_goals")
         .eq("id", user.id)
         .maybeSingle();
 
       setDisplayName(profile?.display_name || "");
+setPredictedTotalGoals(
+  profile?.predicted_total_goals ? String(profile.predicted_total_goals) : ""
+);
 
       const { data: teamsData } = await supabase
         .from("teams")
@@ -65,6 +69,8 @@ const [fixtures, setFixtures] = useState<any[]>([]);
         .order("name");
 
       setTeams(teamsData || []);
+
+
 
       const { data: windowsData } = await supabase
         .from("pick_windows")
@@ -168,6 +174,46 @@ useEffect(() => {
     setMessage("Name saved!");
   };
 
+  const savePredictedTotalGoals = async () => {
+  setMessage("");
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    setMessage("You need to log in first.");
+    return;
+  }
+
+  if (tiebreakerLocked) {
+    setMessage("The total goals tie-breaker is locked.");
+    return;
+  }
+
+  const goals = Number(predictedTotalGoals);
+
+  if (!Number.isInteger(goals) || goals <= 0) {
+    setMessage("Please enter a valid total goals prediction.");
+    return;
+  }
+
+  const { error } = await supabase
+    .from("profiles")
+    .update({
+      predicted_total_goals: goals,
+      predicted_goals_submitted_at: new Date().toISOString(),
+    })
+    .eq("id", user.id);
+
+  if (error) {
+    setMessage(error.message);
+    return;
+  }
+
+  setMessage("Total goals tie-breaker saved.");
+};
+
   const submitPick = async () => {
     setMessage("");
 
@@ -263,6 +309,14 @@ useEffect(() => {
 const selectedWindow =
   pickWindows.find((window) => window.id === selectedWindowId) ||
   currentWindow;
+
+  const tournamentStart = fixtures
+  .filter((fixture) => fixture.match_number === 1)
+  .map((fixture) => fixture.kickoff_at)[0];
+
+const tiebreakerLocked = tournamentStart
+  ? new Date() >= new Date(tournamentStart)
+  : true;
 
 const fixturesForSelectedWindow = fixtures.filter((fixture) => {
   if (!selectedWindow) return false;
@@ -406,6 +460,40 @@ const getPickResult = (pick: any) => {
               Save Name
             </button>
           </div>
+
+<div className="mt-6 rounded-2xl border border-yellow-200 bg-yellow-50 p-5 shadow-sm">
+  <h2 className="text-xl font-extrabold text-slate-900">
+    Tournament goals tie-breaker
+  </h2>
+
+  <p className="mt-2 text-sm font-medium text-slate-800">
+    Predict the total number of goals scored in the tournament, including extra time but excluding penalty shootouts.
+  </p>
+
+  <input
+    className="mt-4 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-semibold text-slate-900 shadow-sm"
+    placeholder="e.g. 172"
+    type="number"
+    disabled={tiebreakerLocked}
+    value={predictedTotalGoals}
+    onChange={(e) => setPredictedTotalGoals(e.target.value)}
+  />
+
+  <button
+    onClick={savePredictedTotalGoals}
+    disabled={tiebreakerLocked}
+    className="mt-3 w-full rounded-xl bg-yellow-600 px-4 py-3 font-bold text-white shadow hover:bg-yellow-700 disabled:bg-slate-400"
+  >
+    Save tie-breaker prediction
+  </button>
+
+  {tiebreakerLocked && (
+    <p className="mt-3 text-sm font-semibold text-red-700">
+      This tie-breaker is locked because the tournament has started.
+    </p>
+  )}
+</div>
+
 
           {currentWindow ? (
             <div className="mt-6 rounded-2xl border border-blue-100 bg-white p-5 shadow-md">
