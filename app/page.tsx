@@ -71,48 +71,70 @@ const resetPassword = async () => {
 };
 
   return (
-    <main className="min-h-screen bg-slate-100 p-8">
-      <div className="mx-auto max-w-md rounded-xl bg-white p-6 shadow">
-        <h1 className="text-2xl font-bold text-slate-900">World Cup Pool Login</h1>
+  <main className="min-h-screen bg-[url('/celebration.jpeg')] bg-cover bg-center bg-fixed p-4 sm:p-8">
+    <div className="flex min-h-screen items-center justify-center bg-black/35">
+      <div className="w-full max-w-md rounded-3xl bg-white p-6 shadow-2xl ring-1 ring-white/30">
+        <div className="text-center">
+          <div className="text-5xl">🏆</div>
 
-        <input
-          className="mt-4 w-full border p-2"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+          <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-slate-900">
+            World Cup Predictor
+          </h1>
 
-        <input
-  className="mt-4 w-full border p-2"
-  placeholder="Password"
-  type="password"
-  value={password}
-  onChange={(e) => setPassword(e.target.value)}
-/>
+          <p className="mt-3 text-base font-semibold text-slate-700">
+            Pick winners. Score points. Beat your friends.
+          </p>
 
-        <button
-          onClick={login}
-          className="mt-4 w-full rounded bg-black p-2 text-white"
-        >
-          Login
-        </button>
+          <div className="mt-4 text-2xl tracking-wide">
+            🇺🇸 🇲🇽 🇨🇦 🇧🇷 🇦🇷 🇫🇷 🇪🇸 🇩🇪
+          </div>
+        </div>
 
-        <button
-  onClick={signUp}
-  className="mt-2 w-full rounded bg-slate-700 p-2 text-white"
->
-  Sign Up
-</button>
+        <div className="mt-6 rounded-2xl bg-blue-50 p-4">
+          <input
+            className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-500 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200"
+            placeholder="Email address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-<button
-  onClick={resetPassword}
-  className="mt-2 w-full rounded bg-slate-200 p-2 text-slate-800"
->
-  Forgot password?
-</button>
+          <input
+            className="mt-3 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-500 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200"
+            placeholder="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-        {message && <p className="mt-4 text-sm">{message}</p>}
+          <button
+            onClick={login}
+            className="mt-4 w-full rounded-xl bg-blue-800 px-4 py-3 font-bold text-white shadow hover:bg-blue-900"
+          >
+            Log in
+          </button>
+
+          <button
+            onClick={signUp}
+            className="mt-3 w-full rounded-xl bg-emerald-700 px-4 py-3 font-bold text-white shadow hover:bg-emerald-800"
+          >
+            Create account
+          </button>
+
+          <button
+            onClick={resetPassword}
+            className="mt-3 w-full rounded-xl bg-slate-800 px-4 py-3 font-bold text-white shadow hover:bg-slate-900"
+          >
+            Forgot password?
+          </button>
+        </div>
+
+        {message && (
+          <p className="mt-4 rounded-xl bg-yellow-50 p-3 text-sm font-semibold text-slate-900">
+            {message}
+          </p>
+        )}
       </div>
-    </main>
-  );
+    </div>
+  </main>
+);
 }
