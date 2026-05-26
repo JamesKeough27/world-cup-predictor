@@ -75,6 +75,8 @@ const currentGpg =
     ? currentGoals / resolvedFixtures.length
     : null;
 
+
+
   return users
     .map((userId) => {
       const userPicks = picks.filter((pick) => pick.user_id === userId);
@@ -224,6 +226,14 @@ const currentGpg =
     ? (currentGoals / resolvedFixtures.length).toFixed(2)
     : "-";
 
+    const tournamentStart = fixtures
+  .filter((fixture) => fixture.match_number === 1)
+  .map((fixture) => fixture.kickoff_at)[0];
+
+const showTiebreakers = tournamentStart
+  ? new Date() >= new Date(tournamentStart)
+  : false;
+
   return (
     <>
       <Navbar />
@@ -304,15 +314,14 @@ const currentGpg =
   </td>
 
   <td className="p-3 font-medium text-slate-900">
-  {player.predictedTotalGoals ? (
+  {!showTiebreakers ? (
+    <span className="text-slate-500">Hidden until kickoff</span>
+  ) : player.predictedTotalGoals ? (
     <div>
       <div className="font-bold text-slate-900">
         {(player.predictedTotalGoals / 104).toFixed(2)}
       </div>
-
-      <div className="text-xs text-slate-600">
-        GPG
-      </div>
+      <div className="text-xs text-slate-600">GPG</div>
     </div>
   ) : (
     "-"
