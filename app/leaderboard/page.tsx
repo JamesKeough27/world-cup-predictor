@@ -304,10 +304,20 @@ const currentGpg =
   </td>
 
   <td className="p-3 font-medium text-slate-900">
-    {player.predictedTotalGoals
-      ? `${player.predictedTotalGoals} goals`
-      : "-"}
-  </td>
+  {player.predictedTotalGoals ? (
+    <div>
+      <div className="font-bold text-slate-900">
+        {(player.predictedTotalGoals / 104).toFixed(2)}
+      </div>
+
+      <div className="text-xs text-slate-600">
+        GPG
+      </div>
+    </div>
+  ) : (
+    "-"
+  )}
+</td>
 
   <td className="p-3 font-medium text-slate-900">{player.correct}</td>
 
