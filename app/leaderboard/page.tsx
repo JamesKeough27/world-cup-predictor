@@ -315,7 +315,7 @@ const showTiebreakers = tournamentStart
 
   <td className="p-3 font-medium text-slate-900">
   {!showTiebreakers ? (
-    <span className="text-slate-500">Hidden until kickoff</span>
+    <span className="text-slate-500">TBC</span>
   ) : player.predictedTotalGoals ? (
     <div>
       <div className="font-bold text-slate-900">
