@@ -60,10 +60,20 @@ function buildLeaderboardRows({
 }) {
   const users = Array.from(new Set(picks.map((pick) => pick.user_id)));
 
-  const currentTotalGoals = fixtures.reduce((sum, fixture) => {
-    if (fixture.home_score === null || fixture.away_score === null) return sum;
-    return sum + fixture.home_score + fixture.away_score;
-  }, 0);
+const resolvedFixtures = fixtures.filter(
+  (fixture) =>
+    fixture.home_score !== null &&
+    fixture.away_score !== null
+);
+
+const currentGoals = resolvedFixtures.reduce((sum, fixture) => {
+  return sum + fixture.home_score + fixture.away_score;
+}, 0);
+
+const currentGpg =
+  resolvedFixtures.length > 0
+    ? currentGoals / resolvedFixtures.length
+    : null;
 
   return users
     .map((userId) => {
@@ -122,15 +132,21 @@ function buildLeaderboardRows({
         return b.winPercentage - a.winPercentage;
       }
 
-      const aGoalDiff =
-        a.predictedTotalGoals === null
-          ? Number.POSITIVE_INFINITY
-          : Math.abs(a.predictedTotalGoals - currentTotalGoals);
+      const aPredictedGpg =
+  a.predictedTotalGoals === null ? null : a.predictedTotalGoals / 104;
 
-      const bGoalDiff =
-        b.predictedTotalGoals === null
-          ? Number.POSITIVE_INFINITY
-          : Math.abs(b.predictedTotalGoals - currentTotalGoals);
+const bPredictedGpg =
+  b.predictedTotalGoals === null ? null : b.predictedTotalGoals / 104;
+
+const aGoalDiff =
+  aPredictedGpg === null || currentGpg === null
+    ? Number.POSITIVE_INFINITY
+    : Math.abs(aPredictedGpg - currentGpg);
+
+const bGoalDiff =
+  bPredictedGpg === null || currentGpg === null
+    ? Number.POSITIVE_INFINITY
+    : Math.abs(bPredictedGpg - currentGpg);
 
       if (aGoalDiff !== bGoalDiff) {
         return aGoalDiff - bGoalDiff;
@@ -240,8 +256,6 @@ const currentGpg =
                 <th className="p-3 text-left text-sm font-bold">Player</th>
                 <th className="p-3 text-left text-sm font-bold">Points</th>
                 <th className="p-3 text-left text-sm font-bold">Tie-breaker</th>
-                <th className="p-3 text-left text-sm font-bold">Correct</th>
-                <th className="p-3 text-left text-sm font-bold">Matches Played</th>
                 <th className="p-3 text-left text-sm font-bold">Win %</th>
                 <th className="p-3 text-left text-sm font-bold">Latest Pick</th>
               </tr>

@@ -18,7 +18,7 @@ export default function RulesPage() {
            <p>
             You can only pick from teams that are playing in the current day/round, and you cannot pick a team that you have already picked in a previous day/round. This will reset at the quarter final stage, allowing you to choose repeats beyond this point.
           </p>
-          <p> The leaderboard will be determined by the total points accumulated throughout the tournament. Ties will be settled by (1) the closest goals scored predicted followed by (2) total number of correct predicted winners</p>
+          <p> The leaderboard will be determined by the total points accumulated throughout the tournament according to the points table below (correct winners in group stage or team progressing in knockout stage). Leaderboard ties will be settled by (1) the closest goals scored predicted followed by (2) total number of correct predicted winners.</p>
 
 <div className="mt-6 rounded-2xl bg-blue-50 p-5 shadow-sm">
   <h2 className="text-2xl font-bold text-slate-900">Scoring</h2>
