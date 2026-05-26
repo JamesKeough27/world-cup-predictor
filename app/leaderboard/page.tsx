@@ -319,10 +319,6 @@ const currentGpg =
   )}
 </td>
 
-  <td className="p-3 font-medium text-slate-900">{player.correct}</td>
-
-  <td className="p-3 font-medium text-slate-900">{player.resolved}</td>
-
   <td className="p-3 font-medium text-slate-900">
     {player.winPercentage}%
   </td>
