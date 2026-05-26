@@ -39,9 +39,12 @@ const login = async () => {
 const signUp = async () => {
   setMessage("");
 
-  const { data, error } = await supabase.auth.signUp({
+  const { error } = await supabase.auth.signUp({
     email,
     password,
+    options: {
+      emailRedirectTo: `${window.location.origin}/pick`,
+    },
   });
 
   if (error) {
@@ -49,13 +52,9 @@ const signUp = async () => {
     return;
   }
 
-  if (data.user && data.user.identities?.length === 0) {
-    setMessage("An account already exists for this email. Please log in instead.");
-    return;
-  }
-
-  setMessage("Account created. You can now log in.");
+  setMessage("Account created. Please check your email to confirm your account.");
 };
+
 
 const resetPassword = async () => {
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
