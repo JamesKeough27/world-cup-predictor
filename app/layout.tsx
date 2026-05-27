@@ -29,9 +29,9 @@ export const metadata = {
 
     images: [
       {
-        url: "/World-Cup-Trophy-2.png",
-        width: 1200,
-        height: 630,
+        url: "/World-Cup-Trophy-3.png",
+        width: 1275,
+        height: 628,
         alt: "World Cup Predictor",
       },
     ],
