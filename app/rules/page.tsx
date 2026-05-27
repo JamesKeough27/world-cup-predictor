@@ -1,7 +1,9 @@
 import Navbar from "@/components/navbar";
+import ProtectedPage from "@/components/protected-page";
 
 export default function RulesPage() {
   return (
+      <ProtectedPage>
       <>
     <Navbar />
     <main className="min-h-screen bg-[url('/Sent-Off.png')] bg-cover bg-center bg-fixed">
@@ -83,5 +85,6 @@ export default function RulesPage() {
       </div>
     </main>
     </>
+    </ProtectedPage>
   );
 }

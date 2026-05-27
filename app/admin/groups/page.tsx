@@ -3,6 +3,7 @@
 import Navbar from "@/components/navbar";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
+import ProtectedPage from "@/components/protected-page";
 
 const GROUPS = [
   "Group A",

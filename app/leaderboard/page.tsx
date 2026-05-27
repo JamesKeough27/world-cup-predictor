@@ -3,6 +3,7 @@
 import Navbar from "@/components/navbar";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
+import ProtectedPage from "@/components/protected-page";
 
 function getPickResult(pick: any, fixtures: any[]) {
   const windowFixtures = fixtures.filter(
@@ -235,6 +236,7 @@ const showTiebreakers = tournamentStart
   : false;
 
   return (
+    <ProtectedPage>
     <>
       <Navbar />
       <main className="min-h-screen bg-[url('/celebration.png')] bg-cover bg-center bg-fixed p-4 sm:p-8">
@@ -371,5 +373,6 @@ const showTiebreakers = tournamentStart
 </a>
       </main>
     </>
+    </ProtectedPage>
   );
 }

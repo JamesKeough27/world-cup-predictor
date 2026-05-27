@@ -3,6 +3,7 @@
 import Navbar from "@/components/navbar";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
+import ProtectedPage from "@/components/protected-page";
 
 type Team = {
   id: string;
@@ -417,6 +418,7 @@ const getPickResult = (pick: any) => {
 };
 
   return (
+    <ProtectedPage>
     <>
       <Navbar />
 
@@ -648,5 +650,6 @@ const getPickResult = (pick: any) => {
         </div>
       </main>
     </>
+    </ProtectedPage>
   );
 }

@@ -5,6 +5,7 @@
 import Navbar from "@/components/navbar";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
+import ProtectedPage from "@/components/protected-page";
 
 export default function AdminPage() {
   const [rounds, setRounds] = useState<any[]>([]);
@@ -105,6 +106,8 @@ const clearFuturePicks = async () => {
 
   if (!isAdmin) {
     return (
+
+      <ProtectedPage>
         <>
         <Navbar />
 
@@ -120,10 +123,12 @@ const clearFuturePicks = async () => {
                   </div>
       </main>
       </>
+      </ProtectedPage>
     );
   }
 
   return (
+    <ProtectedPage>
     <>
         <Navbar />
     <main className="min-h-screen bg-slate-100 p-4 sm:p-8">
@@ -181,5 +186,6 @@ const clearFuturePicks = async () => {
       
     </main>
     </>
+    </ProtectedPage>
   );
 }
