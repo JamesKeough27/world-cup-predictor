@@ -100,10 +100,9 @@ const resetPassword = async () => {
 
         <div className="mt-6 rounded-2xl bg-blue-50 p-4">
           
-          <p className="mt-3 text-sm font-semibold text-slate-800">
+          <p className="mt-3 mb-4 text-sm font-semibold text-slate-800">
   To create an account, enter your email address and choose a password first.
 </p>
-<div></div>
           
           <input
             className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-500 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200"
