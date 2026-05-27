@@ -23,6 +23,11 @@ export default function Home() {
  const [password, setPassword] = useState("");
 
 const login = async () => {
+  if (!email.trim() || !password.trim()) {
+  setMessage("Please enter both an email address and a password.");
+  return;
+}
+  
   const { error } = await supabase.auth.signInWithPassword({
     email,
     password,
@@ -37,8 +42,12 @@ const login = async () => {
 };
 
 const signUp = async () => {
-  setMessage("");
-
+ setMessage("");
+ 
+  if (!email.trim() || !password.trim()) {
+  setMessage("Please enter both an email address and a password.");
+  return;
+}
   const { error } = await supabase.auth.signUp({
     email,
     password,
@@ -90,16 +99,21 @@ const resetPassword = async () => {
         </div>
 
         <div className="mt-6 rounded-2xl bg-blue-50 p-4">
+          
+          <p className="mt-3 text-sm font-semibold text-slate-800">
+  To create an account, enter your email address and choose a password first.
+</p>
+          
           <input
             className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-500 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200"
-            placeholder="Email address"
+            placeholder="Email address required"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
           <input
             className="mt-3 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-500 shadow-sm focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200"
-            placeholder="Password"
+            placeholder="Password required"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
