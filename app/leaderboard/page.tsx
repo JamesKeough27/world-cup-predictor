@@ -240,6 +240,7 @@ const showTiebreakers = tournamentStart
       <main className="min-h-screen bg-[url('/celebration.png')] bg-cover bg-center bg-fixed p-4 sm:p-8">
       <div className="min-h-screen bg-black/40">
         <div className="mx-auto w-full max-w-5xl rounded-2xl bg-white p-6 shadow-xl backdrop-blur">
+          <h1 id="top" className="text-3xl font-bold text-slate-900"></h1>
           <h1 className="text-3xl font-bold text-slate-900">Leaderboard</h1>
 
 <div className="mt-4 rounded-2xl bg-blue-50 p-4 shadow-sm">
@@ -361,6 +362,13 @@ const showTiebreakers = tournamentStart
           )}
         </div>
         </div>
+
+        <a
+  href="#top"
+  className="fixed bottom-4 right-4 rounded-full bg-blue-800 px-4 py-3 text-sm font-bold text-white shadow-lg hover:bg-blue-900"
+>
+  ↑ Top
+</a>
       </main>
     </>
   );

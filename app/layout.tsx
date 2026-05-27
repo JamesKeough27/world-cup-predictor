@@ -13,7 +13,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://world-cup-predictor-theta.vercel.app"),
+
   title: "World Cup Predictor",
+
   description:
     "Pick winners. Score points. Climb the leaderboard.",
 
@@ -21,7 +24,20 @@ export const metadata = {
     title: "World Cup Predictor",
     description:
       "Pick winners. Score points. Climb the leaderboard.",
-    images: ["/World-Cup-Trophy.png"],
+    url: "https://world-cup-predictor-theta.vercel.app",
+    siteName: "World Cup Predictor",
+
+    images: [
+      {
+        url: "/World-Cup-Trophy.png",
+        width: 1200,
+        height: 630,
+        alt: "World Cup Predictor",
+      },
+    ],
+
+    locale: "en_GB",
+    type: "website",
   },
 
   twitter: {
